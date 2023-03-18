@@ -4,9 +4,11 @@ public class Homework {
         task2();
         task3();
     }
-
-    public static void checkYear(int year) {
-        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+    public static boolean checkYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0 || year % 400 == 0);
+    }
+    public static void printMessage(int year) {
+        if (checkYear(year)) {
             System.out.println(year + " is leap year");
         } else {
             System.out.println(year + " isn't leap year");
@@ -27,30 +29,32 @@ public class Homework {
             }
         }
     }
-    public static int deliveryDays(int deliveryDistance) {
+    public static int checkDays(int deliveryDistance) {
         int deliveryDays = 0;
         if (deliveryDistance <= 20) {
             deliveryDays++;
-            System.out.println("Delivery will take: " + deliveryDays + " day");
+        } else if (deliveryDistance < 60) {
+            deliveryDays += 2;
+        } else if (deliveryDistance <= 100) {
+            deliveryDays += 3;
+        } else {
+            deliveryDays = -1;
         }
-        if (deliveryDistance >= 20 && deliveryDistance < 60) {
-            deliveryDays = deliveryDays + 2;
-            System.out.println("Delivery will take: " + deliveryDays + " days");
-        }
-        if (deliveryDistance >= 60 && deliveryDistance <= 100) {
-            deliveryDays = deliveryDays + 3;
-            System.out.println("Delivery will take: " + deliveryDays + " days");
-        }
-            if (deliveryDistance > 100) {
-                System.out.println("There isn't delivery");
-            }
             return deliveryDays;
         }
-    public static void task1() {
+    public static int message(int deliveryDays) {
+        if (deliveryDays >= 0) {
+            System.out.println("Delivery will take: " + deliveryDays + " days");
+        } else {
+            System.out.println("There isn't delivery");
+        }
+        return deliveryDays;
+    }
 
+        public static void task1() {
         System.out.println("Task 1");
-        int year = 100;
-        checkYear(year);
+        int year = 400;
+        printMessage(year);
     }
     public static void task2() {
         System.out.println("Task 2");
@@ -60,7 +64,7 @@ public class Homework {
     }
     public static void task3() {
         System.out.println("task 3");
-        int deliveryDistance = 70;
-        deliveryDays(deliveryDistance);
+        int deliveryDistance = 10;
+        message(checkDays(deliveryDistance));
     }
 }
